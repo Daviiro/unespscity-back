@@ -1,0 +1,15 @@
+{
+  "name": "unespscity-back",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Daviiro/unespscity-back.git",
+  "author": "Time da UnespSCity",
+  "license": "MIT",
+  "scripts": {
+    "dev": "lerna run start --scope @service/*"
+  },
+  "dependencies": {
+    "lerna": "^5.1.8",
+    "nx": "^14.4.2"
+  }
+}
