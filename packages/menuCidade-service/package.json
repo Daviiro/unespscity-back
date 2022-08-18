@@ -1,0 +1,16 @@
+{
+    "name": "menucidade-service",
+    "version": "0.0.1",
+    "scripts": {
+        "start": "node src/index.js"
+    },
+    "dependencies": {
+        "moleculer": "^0.14.19",
+        "moleculer-db": "^0.8.17",
+        "moleculer-db-adapter-sequelize": "^0.2.13",
+        "moleculer-repl": "^0.7.0",
+        "mysql2": "^2.3.3",
+        "password-hash": "^1.2.2",
+        "sequelize": "^6.19.0"
+    }
+}

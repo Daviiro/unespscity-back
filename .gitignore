@@ -1,5 +1,2 @@
-# Yarn/NPM
-**/node_modules
-
-# Environment
-.env
+node_modules
+config.js
