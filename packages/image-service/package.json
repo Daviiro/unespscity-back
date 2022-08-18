@@ -1,0 +1,13 @@
+{
+    "name": "image-service",
+    "version": "0.0.1",
+    "scripts": {
+        "start": "node src/index.js"
+    },
+    "dependencies": {
+        "aws-sdk": "^2.1196.0",
+        "moleculer": "^0.14.19",
+        "moleculer-repl": "^0.7.0",
+        "mongoose": "^6.3.0"
+    }
+}

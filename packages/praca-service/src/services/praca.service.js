@@ -1,5 +1,6 @@
 const Praca = require("../model/Praca")
 
+
 module.exports = {
     name: "praca-service",
     actions: {
@@ -15,9 +16,8 @@ module.exports = {
 
             },
             async handler(ctx) {
-
                 if (ctx.params) {
-                    if (ctx.params.name && ctx.params.street && ctx.params.number && ctx.params.cityId && ctx.params.latitude && ctx.params.longitude && ctx.params.description && ctx.params.images) {
+                    if (ctx.params.name && ctx.params.street && ctx.params.number && ctx.params.cityId && ctx.params.latitude && ctx.params.longitude && ctx.params.description) {
                         return Praca.create({
                             name: ctx.params.name,
                             street: ctx.params.street,
@@ -26,7 +26,6 @@ module.exports = {
                             latitude: ctx.params.latitude,
                             longitude: ctx.params.longitude,
                             description: ctx.params.description,
-                            images: ctx.params.images,
                             isResolved: false
                         })
                     }
@@ -48,7 +47,6 @@ module.exports = {
                 }
                 return false
             }
-        }
-    }
-
+        },
+    },
 }

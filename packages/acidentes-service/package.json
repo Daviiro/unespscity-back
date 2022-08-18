@@ -1,0 +1,18 @@
+{
+	"name": "accident-records",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node src/index.js"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"formidable": "^2.0.1",
+		"moleculer": "^0.14.22",
+		"moleculer-repl": "^0.7.2",
+		"mongoose": "^6.5.2"
+	}
+}

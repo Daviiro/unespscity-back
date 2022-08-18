@@ -33,6 +33,16 @@ module.exports = {
             unique: true
         },
 
+        isAdmin: {
+            type: Sequelize.BOOLEAN,
+            allowNull: false,
+        },
+
+        panicButton: {
+            type: Sequelize.BOOLEAN,
+            allowNull: false,
+        },
+
         cityId: {
             type: Sequelize.INTEGER,
             allowNull: false,

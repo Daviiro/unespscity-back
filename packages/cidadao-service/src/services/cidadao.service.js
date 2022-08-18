@@ -2,11 +2,12 @@
 
 const Database = require("../adapters/Database");
 const passwordHash = require('password-hash');
+var verifyPassword = require('../../node_modules/password-hash/lib/password-hash');
 
 // Filters applied when searching for entities
 // Elements correspond to the columns of the table
 const Filters_Cidadadao = {
-    full: ["id", "name", "password", "email", "mobilePhone", "cityId"],
+    full: ["id", "name", "password", "email", "mobilePhone", "cityId", "panicButton", "isAdmin"],
     restricted: ["name"],
 };
 
@@ -30,7 +31,9 @@ module.exports = {
                         password: res,
                         email: ctx.params.email,
                         mobilePhone: ctx.params.mobilePhone,
-                        cityId: ctx.params.cityId
+                        cityId: ctx.params.cityId,
+                        panicButton: ctx.params.panicButton,
+                        isAdmin: ctx.params.isAdmin,
                     }))
                     .then(() => {
                         console.log("User Account Created", ctx.params.name);
@@ -60,49 +63,37 @@ module.exports = {
             }
         },
 
+        updatePanicButton: {
+            async handler(ctx) {
+                if (ctx.params) {
+                    return await this.DB_Cidadaos.updateOne({ _id: ctx.params.id }, { $set: { panicButton: true } });
+                }
+                return false
+            }
+        },
+
         login: {
             params: {
                 email: "string",
                 password: "string",
             },
-            handler(ctx) {
-                return this.DB_Cidadaos.findOne(ctx, {
+            async handler(ctx) {
+                const user = await this.DB_Cidadaos.findOne(ctx, {
                     query: {
                         email: ctx.params.email,
                     }
-                })
-                    .then((res) => {
-                        const verifyPass = passwordHash.verify(ctx.params.password, res.data.password)
-                        console.log(res.data.password, verifyPass);
-                        if (verifyPass) {
-                            const retorno = {
-                                status: 200,
-                                user: {
-                                    name: res.data.name,
-                                    email: res.data.email,
-                                    token: "asdmkwe2ek2nkr32",
-                                    mobilePhone: res.data.mobilePhone,
-                                    cityId: res.data.cityId
-                                }
-                            }
-                            console.log("User Account loged: ", ctx.params.email);
-                            return retorno
-                        }
-                        return {
-                            status: 200,
-                            user: {
-                            }
-                        }
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                        return {
-                            status: 400,
-                            user: {
-                            },
-                            error: err
-                        }
-                    });
+                });
+                const verifyPass = verifyPassword.verify(ctx.params.password, user.data.password)
+                if (verifyPass) {
+                    return {
+                        status: 200,
+                        data: user
+                    }
+                }
+                return {
+                    status: 400,
+                    error: "err"
+                }
             }
         },
 
