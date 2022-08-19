@@ -162,6 +162,18 @@ module.exports = {
                     "POST /tumulos": "v1.tumulos-service.create",
                     "PUT /tumulos/:id": "v1.tumulos-service.update",
                     "DELETE /tumulos/:id": "v1.tumulos-service.delete",
+                    
+                    // Gráficos
+                    "GET /graficos_acesso": "v1.graficos-acesso-service.getAll",
+                    "POST /graficos_acesso": "v1.graficos-acesso-service.create",
+                    "PUT /graficos_acesso": "v1.graficos-acesso-service.update",
+                    "DELETE /graficos_acesso": "v1.graficos-acesso-service.delete",
+                    
+                    "GET /graficos_servicos": "v1.graficos-servicos-service.getAll",
+                    "GET /graficos_servicos/:id": "v1.graficos-servicos-service.getById",
+                    "POST /graficos_servicos": "v1.graficos-servicos-service.create",
+                    "PUT /graficos_servicos": "v1.graficos-servicos-service.update",
+                    "DELETE /graficos_servicos": "v1.graficos-servicos-service.delete",
 
                     "POST /catalogo": "v1.catalogo-service.create",
                     "GET /catalogo": "v1.catalogo-service.list",
