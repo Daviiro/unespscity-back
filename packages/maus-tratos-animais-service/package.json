@@ -1,0 +1,13 @@
+{
+    "name": "maus-tratos-animais-service",
+    "version": "0.0.1",
+    "scripts": {
+        "start": "node src/index.js"
+    },
+    "dependencies": {
+        "micro": "^9.3.4",
+        "moleculer": "^0.14.19",
+        "moleculer-repl": "^0.7.0",
+        "mongoose": "^6.3.0"
+    }
+}
