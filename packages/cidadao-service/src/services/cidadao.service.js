@@ -22,7 +22,9 @@ module.exports = {
                 password: "string",
                 email: "string",
                 mobilePhone: "string",
-                cityId: "number"
+                cityId: "number",
+                panicButton: "boolean",
+                isAdmin: "boolean"
             },
             handler(ctx) {
                 return this.generateHash(ctx.params.password)

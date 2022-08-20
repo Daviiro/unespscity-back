@@ -94,7 +94,7 @@ module.exports = {
 					"GET /get_all_panic_button":
 						"v1.panic-button-service.getAll",
 					"GET /panic_button": "v1.panic-button-service.getById",
-					"POST /panic_button/:id": "v1.panic-button-service.create",
+					"POST /panic_button": "v1.panic-button-service.create",
 					"POST /call_panic_button":
 						"v1.panic-button-service.callPanicButton",
 					"PUT /panic_button/:id": "v1.panic-button-service.update",
@@ -392,7 +392,7 @@ module.exports = {
 					"DELETE /favorites": "v1.favorites.delete",
 				},
 				cors: {
-					origin: ["http://localhost:3001", "https://localhost:4000"],
+					origin: ["http://localhost:3001", "https://localhost:3002"],
 					methods: ["GET", "OPTIONS", "POST", "PUT", "DELETE"],
 					credentials: true,
 				},

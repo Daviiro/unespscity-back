@@ -5,6 +5,7 @@
         "start": "node src/index.js"
     },
     "dependencies": {
+        "cors": "^2.8.5",
         "lite-server": "^2.6.1",
         "moleculer": "^0.14.19",
         "moleculer-repl": "^0.7.0",
