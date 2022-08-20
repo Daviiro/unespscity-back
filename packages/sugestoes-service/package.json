@@ -1,0 +1,12 @@
+{
+    "name": "sugestoes-service",
+    "version": "0.0.1",
+    "scripts": {
+        "start": "node src/index.js"
+    },
+    "dependencies": {
+        "moleculer": "^0.14.19",
+        "moleculer-repl": "^0.7.0",
+        "mongoose": "^6.3.0"
+    }
+}
