@@ -385,6 +385,11 @@ module.exports = {
 					"PUT /wildanimals": "v1.wild-animals.update",
 					"PUT /wildanimals": "v1.wild-animals.updateResolved",
 					"DELETE /wildanimals": "v1.wild-animals.delete",
+
+					//FAVORITOS
+					"POST /favorites": "v1.favorites.create",
+					"GET /favorites": "v1.favorites.getUserFavorites",
+					"DELETE /favorites": "v1.favorites.delete",
 				},
 				cors: {
 					origin: ["http://localhost:3001", "https://localhost:4000"],
