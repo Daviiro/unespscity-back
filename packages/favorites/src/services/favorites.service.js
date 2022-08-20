@@ -2,7 +2,7 @@ const Favorites = require("../model/Favorites");
 const mongoose = require("mongoose");
 
 module.exports = {
-	name: "solidary-disposal",
+	name: "favorites",
 	version: 1,
 	actions: {
 		create: {
