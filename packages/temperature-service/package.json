@@ -1,0 +1,22 @@
+{
+  "name": "@service/temperature",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon --exec babel-node ./index.js -e js"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.3",
+    "@babel/core": "^7.17.5",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.11",
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "kafkajs": "^2.1.0",
+    "moleculer": "^0.14.21",
+    "moleculer-repl": "^0.7.1",
+    "mongoose": "^6.4.6"
+  }
+}
