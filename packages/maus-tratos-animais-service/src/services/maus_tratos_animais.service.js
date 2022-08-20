@@ -21,17 +21,17 @@ module.exports = {
                 const timeElapsed = Date.now();
                 const today = new Date(timeElapsed);
                 if (ctx.params) {
-                    if (ctx.params.street && ctx.params.number && ctx.params.referencePoint && ctx.params.latitude && ctx.params.longitude && ctx.params.description && ctx.params.images) {
+                    if (ctx.params.data.userId && ctx.params.data.cityId && ctx.params.data.street && ctx.params.data.number && ctx.params.data.latitude && ctx.params.data.longitude && ctx.params.data.description && ctx.params.data.images) {
                         return Maus_Tratos_Animais.create({
                             _id,
-                            userId: ctx.params.userId,
-                            cityId: ctx.params.cityId,
-                            street: ctx.params.street,
-                            number: ctx.params.number,
-                            referencePoint: ctx.params.referencePoint,
-                            latitude: ctx.params.latitude,
-                            longitude: ctx.params.longitude,
-                            description: ctx.params.description,
+                            userId: ctx.params.data.userId,
+                            cityId: ctx.params.data.cityId,
+                            street: ctx.params.data.street,
+                            number: ctx.params.data.number,
+                            referencePoint: ctx.params.data.referencePoint,
+                            latitude: ctx.params.data.latitude,
+                            longitude: ctx.params.data.longitude,
+                            description: ctx.params.data.description,
                             images: ctx.params.images,
                             date: today,
                             isResolved: false
@@ -51,7 +51,7 @@ module.exports = {
 
         getById: {
             async handler(ctx) {
-                if (ctx.params && ctx.params.id) {
+                if (ctx.params.data && ctx.params.id) {
                     return await Maus_Tratos_Animais.find({ _id: ctx.params.id })
                 }
                 return false
@@ -68,15 +68,15 @@ module.exports = {
                 description: "string",
             },
             async handler(ctx) {
-                if (ctx.params && ctx.params.id) {
+                if (ctx.params.data && ctx.params.data.id) {
                     return await Maus_Tratos_Animais.updateOne({ _id: ctx.params.id }, { $set: {
-                        street: ctx.params.street,
-                        number: ctx.params.number,
-                        referencePoint: ctx.params.referencePoint,
-                        latitude: ctx.params.latitude,
-                        longitude: ctx.params.longitude,
-                        description: ctx.params.description,
-                        images: ctx.params.images,
+                        street: ctx.params.data.street,
+                        number: ctx.params.data.number,
+                        referencePoint: ctx.params.data.referencePoint,
+                        latitude: ctx.params.data.latitude,
+                        longitude: ctx.params.data.longitude,
+                        description: ctx.params.data.description,
+                        images: ctx.params.data.images,
                     } });
                 }
                 return false
@@ -94,8 +94,8 @@ module.exports = {
 
         delete: {
             async handler(ctx) {
-                if (ctx.params && ctx.params.id) {
-                    return await Maus_Tratos_Animais.deleteOne({ _id: ctx.params.id })
+                if (ctx.params.data && ctx.params.data.id) {
+                    return await Maus_Tratos_Animais.deleteOne({ _id: ctx.params.data.id })
                 }
                 return false
             }
