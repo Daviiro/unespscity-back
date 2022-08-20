@@ -28,8 +28,11 @@ module.exports = {
         },
 
         getByCity: {
+            params: {
+                idCity: "string",
+            },
             async handler(ctx) {
-                return await UsefulContacts.find()
+                return await UsefulContacts.find({ idCity: parseInt(ctx.params.idCity, 10) })
             }
         },
 
