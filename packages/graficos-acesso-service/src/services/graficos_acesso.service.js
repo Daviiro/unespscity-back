@@ -19,17 +19,17 @@ module.exports = {
             async handler(ctx) {
                 const _id = mongoose.Types.ObjectId();
                 if (ctx.params) {
-                    if (ctx.params.ontem && ctx.params.anteontem && ctx.params._threedays && ctx.params._fourdays && ctx.params._fivedays && ctx.params._sixdays && ctx.params._sevendays) {
+                    if (ctx.params.data.cityId && ctx.params.data.ontem && ctx.params.data.anteontem && ctx.params.data._threedays && ctx.params.data._fourdays && ctx.params.data._fivedays && ctx.params.data._sixdays && ctx.params.data._sevendays) {
                         return GraficosAcesso.create({
                             _id,
-                            cityId: ctx.params.cityId,
-                            ontem: ctx.params.ontem,
-                            anteontem: ctx.params.anteontem,
-                            _threedays: ctx.params._threedays,
-                            _fourdays: ctx.params._fourdays,
-                            _fivedays: ctx.params._fivedays,
-                            _sixdays: ctx.params._sixdays,
-                            _sevendays: ctx.params._sevendays,
+                            cityId: ctx.params.data.cityId,
+                            ontem: ctx.params.data.ontem,
+                            anteontem: ctx.params.data.anteontem,
+                            _threedays: ctx.params.data._threedays,
+                            _fourdays: ctx.params.data._fourdays,
+                            _fivedays: ctx.params.data._fivedays,
+                            _sixdays: ctx.params.data._sixdays,
+                            _sevendays: ctx.params.data._sevendays,
                         })
                     }
                 }
@@ -55,15 +55,15 @@ module.exports = {
                 _sevendays: "number",
             },
             async handler(ctx) {
-                if (ctx.params && ctx.params.id) {
+                if (ctx.params.data && ctx.params.data.id) {
                     return await GraficosAcesso.updateOne({ _id: ctx.params.id }, { $set: {
-                        ontem: ctx.params.ontem,
-                        anteontem: ctx.params.anteontem,
-                        _threedays: ctx.params._threedays,
-                        _fourdays: ctx.params._fourdays,
-                        _fivedays: ctx.params._fivedays,
-                        _sixdays: ctx.params._sixdays,
-                        _sevendays: ctx.params._sevendays,
+                        ontem: ctx.params.data.ontem,
+                        anteontem: ctx.params.data.anteontem,
+                        _threedays: ctx.params.data._threedays,
+                        _fourdays: ctx.params.data._fourdays,
+                        _fivedays: ctx.params.data._fivedays,
+                        _sixdays: ctx.params.data._sixdays,
+                        _sevendays: ctx.params.data._sevendays,
                     } });
                 }
                 return false
@@ -72,8 +72,8 @@ module.exports = {
 
         delete: {
             async handler(ctx) {
-                if (ctx.params && ctx.params.id) {
-                    return await GraficosAcesso.deleteOne({ _id: ctx.params.id })
+                if (ctx.params.data && ctx.params.data.id) {
+                    return await GraficosAcesso.deleteOne({ _id: ctx.params.data.id })
                 }
                 return false
             }

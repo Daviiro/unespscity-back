@@ -15,13 +15,13 @@ module.exports = {
             async handler(ctx) {
                 const _id = mongoose.Types.ObjectId();
                 if (ctx.params) {
-                    if (ctx.params.type && ctx.params.totalSolicitados && ctx.params.totalResolvidos) {
+                    if (ctx.params.data.cityId && ctx.params.data.type && ctx.params.data.totalSolicitados && ctx.params.data.totalResolvidos) {
                         return GraficosServicos.create({
                             _id,
-                            cityId: ctx.params.cityId,
-                            type: ctx.params.type,
-                            totalSolicitados: ctx.params.totalSolicitados,
-                            totalResolvidos: ctx.params.totalResolvidos,
+                            cityId: ctx.params.data.cityId,
+                            type: ctx.params.data.type,
+                            totalSolicitados: ctx.params.data.totalSolicitados,
+                            totalResolvidos: ctx.params.data.totalResolvidos,
                         })
                     }
                 }
@@ -38,7 +38,7 @@ module.exports = {
 
         getById: {
             async handler(ctx) {
-                if (ctx.params && ctx.params.id) {
+                if (ctx.params.data && ctx.params.id) {
                     return await GraficosServicos.find({ _id: ctx.params.id })
                 }
                 return false
@@ -52,11 +52,11 @@ module.exports = {
                 totalResolvidos: "number",
             },
             async handler(ctx) {
-                if (ctx.params && ctx.params.id) {
+                if (ctx.params.data && ctx.params.data.id) {
                     return await GraficosServicos.updateOne({ _id: ctx.params.id }, { $set: {
-                        type: ctx.params.type,
-                        totalSolicitados: ctx.params.totalSolicitados,
-                        totalResolvidos: ctx.params.totalResolvidos,
+                        type: ctx.params.data.type,
+                        totalSolicitados: ctx.params.data.totalSolicitados,
+                        totalResolvidos: ctx.params.data.totalResolvidos,
                     } });
                 }
                 return false
@@ -65,8 +65,8 @@ module.exports = {
 
         delete: {
             async handler(ctx) {
-                if (ctx.params && ctx.params.id) {
-                    return await GraficosServicos.deleteOne({ _id: ctx.params.id })
+                if (ctx.params.data && ctx.params.data.id) {
+                    return await GraficosServicos.deleteOne({ _id: ctx.params.data.id })
                 }
                 return false
             }

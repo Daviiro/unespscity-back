@@ -17,13 +17,13 @@ module.exports = {
                 const timeElapsed = Date.now();
                 const today = new Date(timeElapsed);
                 if (ctx.params) {
-                    if (ctx.params.owner && ctx.params.description && ctx.params.images) {
+                    if (ctx.params.data.userId && ctx.params.data.cityId && ctx.params.data.owner && ctx.params.data.description && ctx.params.data.images) {
                         return Adocao_Animais.create({
                             _id,
-                            userId: ctx.params.userId,
-                            cityId: ctx.params.cityId,
-                            owner: ctx.params.owner,
-                            description: ctx.params.description,
+                            userId: ctx.params.data.userId,
+                            cityId: ctx.params.data.cityId,
+                            owner: ctx.params.data.owner,
+                            description: ctx.params.data.description,
                             images: ctx.params.images,
                             date: today,
                             isResolved: false
@@ -43,7 +43,7 @@ module.exports = {
 
         getById: {
             async handler(ctx) {
-                if (ctx.params && ctx.params.id) {
+                if (ctx.params.data && ctx.params.id) {
                     return await Adocao_Animais.find({ _id: ctx.params.id })
                 }
                 return false
@@ -56,11 +56,11 @@ module.exports = {
                 description: "string",
             },
             async handler(ctx) {
-                if (ctx.params && ctx.params.id) {
-                    return await Adocao_Animais.updateOne({ _id: ctx.params.id }, { $set: {
-                        owner: ctx.params.owner,
-                        description: ctx.params.description,
-                        images: ctx.params.images, 
+                if (ctx.params.data && ctx.params.data.id) {
+                    return await Adocao_Animais.updateOne({ _id: ctx.params.data.id }, { $set: {
+                        owner: ctx.params.data.owner,
+                        description: ctx.params.data.description,
+                        images: ctx.params.data.images, 
                     } });
                 }
                 return false
@@ -78,8 +78,8 @@ module.exports = {
 
         delete: {
             async handler(ctx) {
-                if (ctx.params && ctx.params.id) {
-                    return await Adocao_Animais.deleteOne({ _id: ctx.params.id })
+                if (ctx.params.data && ctx.params.data.id) {
+                    return await Adocao_Animais.deleteOne({ _id: ctx.params.data.id })
                 }
                 return false
             }
