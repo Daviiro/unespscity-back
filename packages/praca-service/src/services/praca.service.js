@@ -10,8 +10,8 @@ module.exports = {
                 street: "string",
                 number: "number",
                 cityId: "number",
-                latitude: "string",
-                longitude: "string",
+                latitude: "number",
+                longitude: "number",
                 description: "string",
 
             },
