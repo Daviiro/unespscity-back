@@ -323,6 +323,13 @@ module.exports = {
 					"POST /image": "image-service.create",
 					"GET /image": "image-service.getAll",
 
+					"POST /programacao": "programacao-service.create",
+                    "GET /programacao": "programacao-service.getAll",
+                    "GET /programacao/markers": "programacao-service.getAllMarkers",
+                    "PUT /programacao/:id": "programacao-service.update",
+                    "PUT /programacao/update_resolved/:id": "programacao-service.updateResolved",
+                    "DELETE /programacao/:id": "programacao-service.delete",
+
 					//ACCIDENT RECORDDS
 					"POST /accidentrecords": "v1.accident-records.create",
 					"GET /accidentrecords": "v1.accident-records.getAll",
