@@ -2,7 +2,7 @@ const Notifications = require("../model/Notifications");
 const mongoose = require("mongoose");
 
 module.exports = {
-	title: "notifications",
+	name: "notifications",
 	version: 1,
 	actions: {
 		create: {
@@ -13,14 +13,14 @@ module.exports = {
 				if (ctx.params.data) {
 					if (
 						ctx.params.data.userId &&
-						ctx.params.data.title &&
+						ctx.params.data.name &&
 						ctx.params.data.description &&
 						ctx.params.data.status
 					) {
 						return Notifications.create({
 							_id,
 							userId: ctx.params.data.userId,
-							title: ctx.params.data.title,
+							name: ctx.params.data.name,
 							description: ctx.params.data.description,
 							status: ctx.params.data.status,
 							date: today,
