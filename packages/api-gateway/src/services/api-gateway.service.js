@@ -92,25 +92,28 @@ module.exports = {
 
 					// Conservação Rural - Parques - Praças
 					"POST /parques": "parques-service.create",
-                    "GET /parques": "parques-service.getAll",
-                    "GET /parques/markers": "parques-service.getAllMarkers",
-                    "PUT /parques/:id": "parques-service.update",
-                    "PUT /parques/update_resolved/:id": "parques-service.updateResolved",
-                    "DELETE /parques/:id": "parques-service.delete",
+					"GET /parques": "parques-service.getAll",
+					"GET /parques/markers": "parques-service.getAllMarkers",
+					"PUT /parques/:id": "parques-service.update",
+					"PUT /parques/update_resolved/:id":
+						"parques-service.updateResolved",
+					"DELETE /parques/:id": "parques-service.delete",
 
 					"POST /praca": "praca-service.create",
-                    "GET /praca": "praca-service.getAll",
-                    "GET /praca/markers": "praca-service.getAllMarkers",
-                    "PUT /praca/:id": "praca-service.update",
-                    "PUT /praca/update_resolved/:id": "praca-service.updateResolved",
-                    "DELETE /praca/:id": "praca-service.delete",
+					"GET /praca": "praca-service.getAll",
+					"GET /praca/markers": "praca-service.getAllMarkers",
+					"PUT /praca/:id": "praca-service.update",
+					"PUT /praca/update_resolved/:id":
+						"praca-service.updateResolved",
+					"DELETE /praca/:id": "praca-service.delete",
 
 					"POST /rurais": "rurais-service.create",
-                    "GET /rurais": "rurais-service.getAll",
-                    "GET /rurais/markers": "rurais-service.getAllMarkers",
-                    "PUT /rurais/:id": "rurais-service.update",
-                    "PUT /rurais/update_resolved/:id": "rurais-service.updateResolved",
-                    "DELETE /rurais/:id": "rurais-service.delete",
+					"GET /rurais": "rurais-service.getAll",
+					"GET /rurais/markers": "rurais-service.getAllMarkers",
+					"PUT /rurais/:id": "rurais-service.update",
+					"PUT /rurais/update_resolved/:id":
+						"rurais-service.updateResolved",
+					"DELETE /rurais/:id": "rurais-service.delete",
 
 					// Botão do Pânico
 					"GET /get_all_panic_button":
@@ -324,11 +327,13 @@ module.exports = {
 					"GET /image": "image-service.getAll",
 
 					"POST /programacao": "programacao-service.create",
-                    "GET /programacao": "programacao-service.getAll",
-                    "GET /programacao/markers": "programacao-service.getAllMarkers",
-                    "PUT /programacao/:id": "programacao-service.update",
-                    "PUT /programacao/update_resolved/:id": "programacao-service.updateResolved",
-                    "DELETE /programacao/:id": "programacao-service.delete",
+					"GET /programacao": "programacao-service.getAll",
+					"GET /programacao/markers":
+						"programacao-service.getAllMarkers",
+					"PUT /programacao/:id": "programacao-service.update",
+					"PUT /programacao/update_resolved/:id":
+						"programacao-service.updateResolved",
+					"DELETE /programacao/:id": "programacao-service.delete",
 
 					//ACCIDENT RECORDDS
 					"POST /accidentrecords": "v1.accident-records.create",
@@ -426,6 +431,12 @@ module.exports = {
 					"GET /offers/all": "v1.local-trade-offers.getAll",
 					"PUT /offers": "v1.local-trade-offers.update",
 					"DELETE /offers": "v1.local-trade-offers.delete",
+
+					//COLETA DE LIXO
+					"POST /refuse": "v1.refuse-collection.create",
+					"GET /refuse": "v1.refuse-collection.getByCityId",
+					"GET /refuse/all": "v1.refuse-collection.getAll",
+					"DELETE /refuse": "v1.refuse-collection.delete",
 				},
 				cors: {
 					origin: ["http://localhost:3001", "https://localhost:3002"],
