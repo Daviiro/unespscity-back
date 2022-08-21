@@ -360,7 +360,7 @@ module.exports = {
 					"PUT /removaldeadanimals": "v1.removal-deadanimals.update",
 					"PUT /removaldeadanimals":
 						"v1.removal-deadanimals.updateResolved",
-					"DELETE /removaldeadanimals":
+					"DELETE /removaldeadanimals/:id":
 						"v1.removal-deadanimals.delete",
 
 					//NEEDY FAMILIES
@@ -384,7 +384,7 @@ module.exports = {
 					"GET /removetrash": "v1.remove-trash.getAll",
 					"PUT /removetrash": "v1.remove-trash.update",
 					"PUT /removetrash": "v1.remove-trash.updateResolved",
-					"DELETE /removetrash": "v1.remove-trash.delete",
+					"DELETE /removetrash/:id": "v1.remove-trash.delete",
 
 					//SOLIDARY DISPOSAL
 					"POST /solidarydisposal": "v1.solidary-disposal.create",
