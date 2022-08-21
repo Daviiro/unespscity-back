@@ -90,6 +90,28 @@ module.exports = {
 					"POST /start_temperature": "v1.temperature-service.start",
 					"POST /stop_temperature": "v1.temperature-service.stop",
 
+					// Conservação Rural - Parques - Praças
+					"POST /parques": "parques-service.create",
+                    "GET /parques": "parques-service.getAll",
+                    "GET /parques/markers": "parques-service.getAllMarkers",
+                    "PUT /parques/:id": "parques-service.update",
+                    "PUT /parques/update_resolved/:id": "parques-service.updateResolved",
+                    "DELETE /parques/:id": "parques-service.delete",
+
+					"POST /praca": "praca-service.create",
+                    "GET /praca": "praca-service.getAll",
+                    "GET /praca/markers": "praca-service.getAllMarkers",
+                    "PUT /praca/:id": "praca-service.update",
+                    "PUT /praca/update_resolved/:id": "praca-service.updateResolved",
+                    "DELETE /praca/:id": "praca-service.delete",
+
+					"POST /rurais": "rurais-service.create",
+                    "GET /rurais": "rurais-service.getAll",
+                    "GET /rurais/markers": "rurais-service.getAllMarkers",
+                    "PUT /rurais/:id": "rurais-service.update",
+                    "PUT /rurais/update_resolved/:id": "rurais-service.updateResolved",
+                    "DELETE /rurais/:id": "rurais-service.delete",
+
 					// Botão do Pânico
 					"GET /get_all_panic_button":
 						"v1.panic-button-service.getAll",
