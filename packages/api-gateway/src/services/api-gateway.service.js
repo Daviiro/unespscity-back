@@ -390,6 +390,13 @@ module.exports = {
 					"POST /favorites": "v1.favorites.create",
 					"GET /favorites": "v1.favorites.getUserFavorites",
 					"DELETE /favorites": "v1.favorites.delete",
+
+					//OFERTAS LOCAIS
+					"POST /offers": "v1.local-trade-offers.create",
+					"GET /offers": "v1.local-trade-offers.getByCityId",
+					"GET /offers/all": "v1.local-trade-offers.getAll",
+					"PUT /offers": "v1.local-trade-offers.update",
+					"DELETE /offers": "v1.local-trade-offers.delete",
 				},
 				cors: {
 					origin: ["http://localhost:3001", "https://localhost:3002"],
