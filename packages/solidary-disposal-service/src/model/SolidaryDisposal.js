@@ -9,6 +9,7 @@ const donationTypeSchema = mongoose.Schema({
 
 const schema = mongoose.Schema({
 	_id: mongoose.Schema.Types.ObjectId,
+	userId: Number,
 	cityid: Number,
 	street: String,
 	streetNumber: Number,

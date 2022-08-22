@@ -10,29 +10,40 @@ module.exports = {
 				const _id = mongoose.Types.ObjectId();
 				const timeElapsed = Date.now();
 				const today = new Date(timeElapsed);
-				if (ctx.params) {
+				console.log("Data received: " + ctx.params.data.userId);
+				console.log("Data received: " + ctx.params.data.cityid);
+				console.log("Data received: " + ctx.params.data.street);
+				console.log("Data received: " + ctx.params.data.streetNumber);
+				console.log("Data received: " + ctx.params.data.referencePoint);
+				console.log("Data received: " + ctx.params.data.latitude);
+				console.log("Data received: " + ctx.params.data.longitude);
+				console.log("Data received: " + ctx.params.data.donationType);
+				console.log("Data received: " + ctx.params.data.description);
+
+				if (ctx.params.data) {
 					if (
-						ctx.params.cityid &&
-						ctx.params.street &&
-						ctx.params.streetNumber &&
-						ctx.params.referencePoint &&
-						ctx.params.latitude &&
-						ctx.params.longitude &&
-						ctx.params.donationType &&
-						ctx.params.description &&
-						ctx.params.images
+						ctx.params.data.userId &&
+						ctx.params.data.cityid &&
+						ctx.params.data.street &&
+						ctx.params.data.streetNumber &&
+						ctx.params.data.referencePoint &&
+						ctx.params.data.latitude &&
+						ctx.params.data.longitude &&
+						ctx.params.data.donationType &&
+						ctx.params.data.description
 					) {
 						return SolidaryDisposal.create({
 							_id,
-							cityid: ctx.params.cityid,
-							street: ctx.params.street,
-							streetNumber: ctx.params.streetNumber,
-							referencePoint: ctx.params.referencePoint,
-							latitude: ctx.params.latitude,
-							longitude: ctx.params.longitude,
-							donationType: ctx.params.donationType,
-							description: ctx.params.description,
-							images: ctx.params.images,
+							userId: ctx.params.data.userId,
+							cityid: ctx.params.data.cityid,
+							street: ctx.params.data.street,
+							streetNumber: ctx.params.data.streetNumber,
+							referencePoint: ctx.params.data.referencePoint,
+							latitude: ctx.params.data.latitude,
+							longitude: ctx.params.data.longitude,
+							donationType: ctx.params.data.donationType,
+							description: ctx.params.data.description,
+							images: ctx.params.data.images,
 							isResolved: false,
 							date: today,
 						});
@@ -61,20 +72,21 @@ module.exports = {
 
 		update: {
 			async handler(ctx) {
-				if (ctx.params && ctx.params.id) {
+				if (ctx.params.data && ctx.params.data.id) {
 					return await SolidaryDisposal.updateOne(
 						{ _id: ctx.params.id },
 						{
 							$set: {
-								cityid: ctx.params.cityid,
-								street: ctx.params.street,
-								streetNumber: ctx.params.streetNumber,
-								referencePoint: ctx.params.referencePoint,
-								latitude: ctx.params.latitude,
-								longitude: ctx.params.longitude,
-								donationType: ctx.params.donationType,
-								description: ctx.params.description,
-								images: ctx.params.images,
+								userId: ctx.params.userId,
+								cityid: ctx.params.data.cityid,
+								street: ctx.params.data.street,
+								streetNumber: ctx.params.data.streetNumber,
+								referencePoint: ctx.params.data.referencePoint,
+								latitude: ctx.params.data.latitude,
+								longitude: ctx.params.data.longitude,
+								donationType: ctx.params.data.donationType,
+								description: ctx.params.data.description,
+								images: ctx.params.data.images,
 							},
 						}
 					);
