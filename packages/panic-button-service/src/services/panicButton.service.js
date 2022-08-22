@@ -20,9 +20,9 @@ module.exports = {
         create: {
             async handler(ctx) {
                 if (ctx.params) {
-                    DB_Cidadaos.updateOne({ id: ctx.params.data.userId }, { $set: { panicButton: true } });
                     return PanicButton.create({
                         userId: ctx.params.data.userId,
+                        panicButtonPhone: ctx.params.data.panicButtonPhone,
                         message: ctx.params.data.message,
                         notifyPolice: ctx.params.data.notifyPolice,
                         notifyAmbulance: ctx.params.data.notifyAmbulance,

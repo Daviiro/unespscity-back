@@ -27,7 +27,7 @@ function onError(ws, err) {
 }
 
 async function onMessage(ws, data, restart) {
-    /* if (restart) {                       //UM JEITO DE FAZER - DEU MAIS CERTO    METODO 01 Se sair e entrar recebe os dados
+    if (restart) {                       //UM JEITO DE FAZER - DEU MAIS CERTO    METODO 01 Se sair e entrar recebe os dados
         console.log("Iniciou")
         consumer = kafka.consumer({ groupId: 'temperature-group' })
         await consumer.connect()
@@ -36,11 +36,26 @@ async function onMessage(ws, data, restart) {
 
     consumer.run({
         eachMessage: async ({ topic, partition, message }) => {
-            console.log(topic);
-            console.log(`- ${message.value}`)
-            ws.send(`${message.value}`)
+            if(topic === "iot_temperature") {
+                values = JSON.parse(message.value);
+                totalTemperature = parseFloat(values.temperature) + totalTemperature;
+                totalHumidity = parseFloat(values.humidity) + totalHumidity;
+                totalPrecipitation = parseFloat(values.precipitation) + totalPrecipitation;
+                totalWind = parseFloat(values.wind) + totalWind;
+                if(!firstTemperature) {
+                    totalTemperature = totalTemperature / 2;
+                    totalHumidity = totalHumidity / 2;
+                    totalPrecipitation = totalPrecipitation / 2;
+                    totalWind = totalWind / 2;
+                }
+                firstTemperature = false; 
+                ws.send(`${message.value}===${totalTemperature}===${totalHumidity}===${totalPrecipitation}===${totalWind}`)
+            }
+            if(topic === "panic_button") {
+                ws.send(`${message.value}`);
+            }
         },
-    }) */
+    })
 
 
     /* if (data.toString() === "Hello" && !firstTime) {         // ESSE AQUI QUEBRA
@@ -63,7 +78,7 @@ async function onMessage(ws, data, restart) {
     }) */
 
 
-    if (data.toString() !== "Hello" || firstTime) {          // Metodo 02 - Se sair e tentar entrar de novo, nao recebe dados
+    /* if (data.toString() !== "Hello" || firstTime) {          // Metodo 02 - Se sair e tentar entrar de novo, nao recebe dados
         firstTime = false;
         console.log("Entrou")
         consumer.run({
@@ -81,14 +96,17 @@ async function onMessage(ws, data, restart) {
                         totalWind = totalWind / 2;
                     }
                     firstTemperature = false; 
+                    ws.send(`${message.value}===${totalTemperature}===${totalHumidity}===${totalPrecipitation}===${totalWind}`)
                 }
-                ws.send(`${message.value}===${totalTemperature}===${totalHumidity}===${totalPrecipitation}===${totalWind}`)
+                if(topic === "panic_button") {
+                    ws.send(`${message.value}`);
+                }
             },
         })
-    }
-    /* if (data.toString() === "Hello" && !firstTime) {
-        ws.send("Reconectando")
     } */
+    if (data.toString() === "Hello" && !firstTime) {
+        ws.send("Reconectando")
+    }
     console.log(`onMessage: ${data}`);
 }
 async function disc() {
@@ -97,17 +115,17 @@ async function disc() {
     console.log("Finalizou")
 }
 async function onConnection(ws, req) {
-    /* if (pause) {         //    METODO 01 
+    if (pause) {         //    METODO 01 
         consumer.disconnect();
-    } */
+    }
 
     ws.on('message', async data => {
-        console.log("PORRA")
-        /* if (data.toString() === "Hello") {       //   METODO 01 
+        console.log("Entrou aqui")
+        if (data.toString() === "Hello") {       //   METODO 01 
             await disc()
-        } */
-        //onMessage(ws, data, data.toString() === "Hello")            //  METODO 01 
-        onMessage(ws, data);                                            // Metodo 02
+        }
+        onMessage(ws, data, data.toString() === "Hello")            //  METODO 01 
+        //onMessage(ws, data);                                            // Metodo 02
     });
     /* consumer.run({
         eachMessage: async ({ topic, partition, message }) => {
