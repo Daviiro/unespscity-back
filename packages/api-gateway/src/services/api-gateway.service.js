@@ -437,6 +437,12 @@ module.exports = {
 					"GET /refuse": "v1.refuse-collection.getByCityId",
 					"GET /refuse/all": "v1.refuse-collection.getAll",
 					"DELETE /refuse": "v1.refuse-collection.delete",
+
+					//MONITORAMENTE DA ROTA DO GUARDIHA
+					"POST /guardian": "v1.guardian-monitoring.create",
+					"GET /guardian": "v1.guardian-monitoring.getByCityId",
+					"GET /guardian/all": "v1.guardian-monitoring.getAll",
+					"DELETE /guardian": "v1.guardian-monitoring.delete",
 				},
 				cors: {
 					origin: ["http://localhost:3001", "https://localhost:3002"],
