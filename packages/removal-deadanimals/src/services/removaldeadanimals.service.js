@@ -61,7 +61,7 @@ module.exports = {
 
 		update: {
 			async handler(ctx) {
-				if (ctx.params && ctx.params.id) {
+				if (ctx.params && ctx.params.data.id) {
 					return await RemovalDeadAnimals.updateOne(
 						{ _id: ctx.params.data.id },
 						{
