@@ -1,5 +1,5 @@
 {
-	"name": "information-about-trees",
+	"name": "@01_service/information-about-trees",
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",

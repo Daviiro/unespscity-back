@@ -1,5 +1,5 @@
 {
-    "name": "locais-uteis-service",
+    "name": "@02_service/locais-uteis-service",
     "version": "0.0.1",
     "scripts": {
         "start": "node src/index.js"

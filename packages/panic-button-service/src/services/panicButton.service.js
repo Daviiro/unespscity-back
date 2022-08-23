@@ -1,5 +1,6 @@
 const PanicButton = require("../model/PanicButton")
 import { CompressionTypes, Kafka, logLevel } from 'kafkajs';
+const mongoose = require("mongoose");
 
 const kafka = new Kafka({
     clientId: 'api',
@@ -19,8 +20,10 @@ module.exports = {
     actions: {
         create: {
             async handler(ctx) {
+                const _id = mongoose.Types.ObjectId();
                 if (ctx.params) {
                     return PanicButton.create({
+                        _id,
                         userId: ctx.params.data.userId,
                         panicButtonPhone: ctx.params.data.panicButtonPhone,
                         message: ctx.params.data.message,

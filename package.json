@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev01": "lerna run start --scope @01_service/*",
+    "dev02": "lerna run start --scope @02_service/*"
   },
   "author": "",
   "license": "ISC",

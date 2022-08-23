@@ -21,12 +21,15 @@ function getRandomArbitrary(min, max) {
 
 let atualTemperature = getRandomArbitrary(20,26);  
 let atualUmidade = getRandomArbitrary(40, 45);
-let chuva = getRandomArbitrary(0, 10);
+let chuva = getRandomArbitrary(0, 8);
 let vento = getRandomArbitrary(3, 8);
+let pollution = getRandomArbitrary(31, 33);
+
 let atualTemperature02 = getRandomArbitrary(20,26);  
 let atualUmidade02 = getRandomArbitrary(atualUmidade - 2, atualUmidade + 2);
-let chuva2 = getRandomArbitrary(0, 10);
+let chuva2 = getRandomArbitrary(0, 8);
 let vento2 = getRandomArbitrary(3, 8);
+let pollution2 = getRandomArbitrary(31, 33);
 
 let sensorData = {
     title: "Sensor localizado na Manoel Goulart - Frente ao Parque do Povo",
@@ -35,7 +38,8 @@ let sensorData = {
     temperature: 0, 
     humidity: 0, 
     precipitation: 0,
-    wind: 0
+    wind: 0,
+    pollution: 0
 };
 
 let sensorData02 = {
@@ -45,15 +49,17 @@ let sensorData02 = {
     temperature: 0, 
     humidity: 0, 
     precipitation: 0,
-    wind: 0
+    wind: 0,
+    pollution: 0
 };
 
 async function generateData02() {
     sensorData02.temperature = getRandomArbitrary(atualTemperature02 - 0.5, atualTemperature02 + 0.5).toFixed(1);
     sensorData02.humidity = getRandomArbitrary(atualUmidade02 - 2, atualUmidade02 + 2).toFixed(1);
-    sensorData02.precipitation = Math.round(getRandomArbitrary(chuva2 - 3, chuva2 + 3));
+    sensorData02.precipitation = Math.round(getRandomArbitrary(chuva2 - 1, chuva2 + 1));
     sensorData02.wind = getRandomArbitrary(vento2 - 1, vento2 + 1).toFixed(1);
-
+    sensorData02.pollution = Math.round(getRandomArbitrary(pollution2 - 1, pollution2 + 1));
+    
     await producer.send({
         topic: 'iot_temperature',
         compression: CompressionTypes.GZIP,
@@ -66,8 +72,9 @@ async function generateData02() {
 async function generateData() {
     sensorData.temperature = getRandomArbitrary(atualTemperature - 0.5, atualTemperature + 0.5).toFixed(1);
     sensorData.humidity = getRandomArbitrary(atualUmidade - 2, atualUmidade + 2).toFixed(1);
-    sensorData.precipitation = Math.round(getRandomArbitrary(chuva - 3, chuva + 3));
+    sensorData.precipitation = Math.round(getRandomArbitrary(chuva - 1, chuva + 1));
     sensorData.wind = getRandomArbitrary(vento - 1, vento + 1).toFixed(1);
+    sensorData.pollution = Math.round(getRandomArbitrary(pollution - 1, pollution + 1));
 
     await producer.send({
         topic: 'iot_temperature',

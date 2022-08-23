@@ -1,5 +1,5 @@
 {
-	"name": "local-trade-offers",
+	"name": "@01_service/local-trade-offers",
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",

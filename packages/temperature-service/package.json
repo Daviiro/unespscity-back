@@ -1,5 +1,5 @@
 {
-  "name": "@service/temperature",
+  "name": "@02_service/temperature",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",

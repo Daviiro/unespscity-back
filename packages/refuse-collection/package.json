@@ -1,5 +1,5 @@
 {
-	"name": "refuse-collection",
+	"name": "@01_service/refuse-collection",
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",

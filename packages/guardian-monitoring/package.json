@@ -1,5 +1,5 @@
 {
-	"name": "guardian-monitoring",
+	"name": "@02_service/guardian-monitoring",
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",

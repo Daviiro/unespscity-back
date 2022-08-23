@@ -15,11 +15,12 @@ let totalWind = 0;
 let values = {}
 let firstTemperature = true;
 const topic = 'iot_temperature'
-const topic2 = 'iot_pollution'
+//const topic2 = 'iot_pollution'
+//const topic2 = 'accident_records'
 const topic3 = 'panic_button'
 let consumer = kafka.consumer({ groupId: 'temperature-group' })
 consumer.connect()                                                  // Metodo 02
-consumer.subscribe({ topics: [topic, topic2, topic3] })             // Metodo 02
+consumer.subscribe({ topics: [topic, topic3] })             // Metodo 02
 
 
 function onError(ws, err) {
@@ -31,7 +32,7 @@ async function onMessage(ws, data, restart) {
         console.log("Iniciou")
         consumer = kafka.consumer({ groupId: 'temperature-group' })
         await consumer.connect()
-        await consumer.subscribe({ topics: [topic, topic2, topic3] })
+        await consumer.subscribe({ topics: [topic, topic3] })
     }
 
     consumer.run({
@@ -56,26 +57,6 @@ async function onMessage(ws, data, restart) {
             }
         },
     })
-
-
-    /* if (data.toString() === "Hello" && !firstTime) {         // ESSE AQUI QUEBRA
-        console.log("Entrou aqui")
-        await consumer.disconnect();
-        //await consumer.stop();
-
-        await consumer.connect()
-        await consumer.subscribe({ topics: [topic, topic2, topic3] })
-    }
-    firstTime = false;
-    consumer.run({
-        eachMessage: async ({ topic, partition, message }) => {
-            console.log(topic);
-
-            //console.log(`- ${message.value}`)
-            ws.send(`${message.value}`)
-
-        },
-    }) */
 
 
     /* if (data.toString() !== "Hello" || firstTime) {          // Metodo 02 - Se sair e tentar entrar de novo, nao recebe dados
@@ -150,3 +131,30 @@ module.exports = (server) => {
     console.log(`App Web Socket Server is running!`);
     return wss;
 }
+
+
+
+
+
+
+
+
+
+    /* if (data.toString() === "Hello" && !firstTime) {         // ESSE AQUI QUEBRA
+        console.log("Entrou aqui")
+        await consumer.disconnect();
+        //await consumer.stop();
+
+        await consumer.connect()
+        await consumer.subscribe({ topics: [topic, topic3] })
+    }
+    firstTime = false;
+    consumer.run({
+        eachMessage: async ({ topic, partition, message }) => {
+            console.log(topic);
+
+            //console.log(`- ${message.value}`)
+            ws.send(`${message.value}`)
+
+        },
+    }) */
