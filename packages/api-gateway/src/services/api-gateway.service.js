@@ -443,6 +443,12 @@ module.exports = {
 					"GET /guardian": "v1.guardian-monitoring.getByCityId",
 					"GET /guardian/all": "v1.guardian-monitoring.getAll",
 					"DELETE /guardian": "v1.guardian-monitoring.delete",
+
+					//VIOLENCIA ANIMAL
+					"POST /animalviolence": "v1.animal-violence.create",
+					"GET /animalviolence": "v1.animal-violence.getAll",
+					"PUT /animalviolence": "v1.animal-violence.update",
+					"DELETE /animalviolence": "v1.animal-violence.delete",
 				},
 				cors: {
 					origin: ["http://localhost:3001", "https://localhost:3002"],

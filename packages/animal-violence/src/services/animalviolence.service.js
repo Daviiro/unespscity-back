@@ -1,8 +1,8 @@
-const HomelessPeople = require("../model/HomelessPeople");
+const AnimalViolence = require("../model/AnimalViolence");
 const mongoose = require("mongoose");
 
 module.exports = {
-	name: "homeless-people",
+	name: "animal-violence",
 	version: 1,
 	actions: {
 		create: {
@@ -10,28 +10,30 @@ module.exports = {
 				const _id = mongoose.Types.ObjectId();
 				const timeElapsed = Date.now();
 				const today = new Date(timeElapsed);
-				if (ctx.params.data) {
+				if (ctx.params) {
 					if (
-						ctx.params.data.name &&
 						ctx.params.data.cityId &&
-						ctx.params.data.rg &&
-						ctx.params.data.cpf &&
-						ctx.params.data.birthday &&
+						ctx.params.data.street &&
+						ctx.params.data.userId &&
+						ctx.params.data.streetNumber &&
+						ctx.params.data.referencePoint &&
 						ctx.params.data.latitude &&
 						ctx.params.data.longitude &&
-						ctx.params.data.description
+						ctx.params.data.description &&
+						ctx.params.data.images
 					) {
-						return HomelessPeople.create({
+						return AnimalViolence.create({
 							_id,
-							name: ctx.params.data.name,
+							userId: ctx.params.data.userId,
 							cityId: ctx.params.data.cityId,
-							rg: ctx.params.data.rg,
-							cpf: ctx.params.data.cpf,
-							birthday: ctx.params.data.birthday,
+							street: ctx.params.data.street,
+							streetNumber: ctx.params.data.streetNumber,
+							referencePoint: ctx.params.data.referencePoint,
 							latitude: ctx.params.data.latitude,
 							longitude: ctx.params.data.longitude,
 							description: ctx.params.data.description,
-							images: ctx.params.data.images,
+							images: ctx.params.images,
+							isResolved: false,
 							date: today,
 						});
 					}
@@ -42,14 +44,14 @@ module.exports = {
 
 		getAll: {
 			async handler(ctx) {
-				return await HomelessPeople.find();
+				return await AnimalViolence.find();
 			},
 		},
 
 		getById: {
 			async handler(ctx) {
 				if (ctx.params && ctx.params.id) {
-					return await HomelessPeople.find({
+					return await AnimalViolence.find({
 						_id: ctx.params.id,
 					});
 				}
@@ -59,16 +61,16 @@ module.exports = {
 
 		update: {
 			async handler(ctx) {
-				if (ctx.params && ctx.params.data.id) {
-					return await HomelessPeople.updateOne(
-						{ _id: ctx.params.data.id },
+				if (ctx.params && ctx.params.id) {
+					return await AnimalViolence.updateOne(
+						{ _id: ctx.params.id },
 						{
 							$set: {
-								name: ctx.params.data.name,
+								userId: ctx.params.data.userId,
 								cityId: ctx.params.data.cityId,
-								rg: ctx.params.data.rg,
-								cpf: ctx.params.data.cpf,
-								birthday: ctx.params.data.birthday,
+								street: ctx.params.data.street,
+								streetNumber: ctx.params.data.streetNumber,
+								referencePoint: ctx.params.data.referencePoint,
 								latitude: ctx.params.data.latitude,
 								longitude: ctx.params.data.longitude,
 								description: ctx.params.data.description,
@@ -81,10 +83,22 @@ module.exports = {
 			},
 		},
 
+		updateResolved: {
+			async handler(ctx) {
+				if (ctx.params && ctx.params.id) {
+					return await AnimalViolence.updateOne(
+						{ _id: ctx.params.id },
+						{ $set: { isResolved: true } }
+					);
+				}
+				return false;
+			},
+		},
+
 		delete: {
 			async handler(ctx) {
 				if (ctx.params && ctx.params.id) {
-					return await HomelessPeople.deleteOne({
+					return await AnimalViolence.deleteOne({
 						_id: ctx.params.id,
 					});
 				}

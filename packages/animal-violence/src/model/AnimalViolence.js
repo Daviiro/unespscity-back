@@ -2,16 +2,17 @@ const mongoose = require("mongoose");
 
 const schema = mongoose.Schema({
 	_id: mongoose.Schema.Types.ObjectId,
-	name: String,
+	userId: Number,
 	cityId: Number,
-	rg: String,
-	cpf: String,
-	birthday: Date,
+	street: String,
+	streetNumber: Number,
+	referencePoint: String,
 	latitude: Number,
 	longitude: Number,
 	description: String,
 	images: [String],
+	isResolved: Boolean,
 	date: Date,
 });
 
-module.exports = mongoose.model("HomelessPeople", schema);
+module.exports = mongoose.model("AnimalViolence", schema);
