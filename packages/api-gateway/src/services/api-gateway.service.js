@@ -446,6 +446,16 @@ module.exports = {
 					"GET /animalviolence": "v1.animal-violence.getAll",
 					"PUT /animalviolence": "v1.animal-violence.update",
 					"DELETE /animalviolence": "v1.animal-violence.delete",
+
+					//VIOLENCIA DOMESTICA
+					"POST /domesticviolence":
+						"v1.victims-of-domestic-violence.create",
+					"GET /domesticviolence":
+						"v1.victims-of-domestic-violence.getAll",
+					"PUT /domesticviolence":
+						"v1.victims-of-domestic-violence.update",
+					"DELETE /domesticviolence":
+						"v1.victims-of-domestic-violence.delete",
 				},
 				cors: {
 					origin: ["http://localhost:3001", "https://localhost:3002"],

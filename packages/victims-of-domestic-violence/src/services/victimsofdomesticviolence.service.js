@@ -61,20 +61,20 @@ module.exports = {
 
 		update: {
 			async handler(ctx) {
-				if (ctx.params && ctx.params.id) {
+				if (ctx.params && ctx.params.data.id) {
 					return await VictimsOfDomesticViolence.updateOne(
 						{ _id: ctx.params.id },
 						{
 							$set: {
 								cityId: ctx.params.data.cityId,
-								cityId: ctx.params.cityId,
-								street: ctx.params.street,
-								streetNumber: ctx.params.streetNumber,
-								referencePoint: ctx.params.referencePoint,
-								latitude: ctx.params.latitude,
-								longitude: ctx.params.longitude,
-								description: ctx.params.description,
-								images: ctx.params.images,
+								cityId: ctx.params.data.cityId,
+								street: ctx.params.data.street,
+								streetNumber: ctx.params.data.streetNumber,
+								referencePoint: ctx.params.data.referencePoint,
+								latitude: ctx.params.data.latitude,
+								longitude: ctx.params.data.longitude,
+								description: ctx.params.data.description,
+								images: ctx.params.data.images,
 							},
 						}
 					);
