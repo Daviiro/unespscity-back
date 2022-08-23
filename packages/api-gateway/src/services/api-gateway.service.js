@@ -376,13 +376,10 @@ module.exports = {
 						"v1.removal-deadanimals.delete",
 
 					//NEEDY FAMILIES
-					"POST /removaldeadanimals": "v1.removal-deadanimals.create",
-					"GET /removaldeadanimals": "v1.removal-deadanimals.getAll",
-					"PUT /removaldeadanimals": "v1.removal-deadanimals.update",
-					"PUT /removaldeadanimals":
-						"v1.removal-deadanimals.updateResolved",
-					"DELETE /removaldeadanimals":
-						"v1.removal-deadanimals.delete",
+					"POST /needyfamilies": "v1.needy-families.create",
+					"GET /needyfamilies": "v1.needy-families.getAll",
+					"PUT /needyfamilies": "v1.needy-families.update",
+					"DELETE /needyfamilies": "v1.needy-families.delete",
 
 					//HOMELESS PEOPLE
 					"POST /homelesspeople": "v1.homeless-people.create",
