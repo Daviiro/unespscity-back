@@ -456,6 +456,11 @@ module.exports = {
 						"v1.victims-of-domestic-violence.update",
 					"DELETE /domesticviolence":
 						"v1.victims-of-domestic-violence.delete",
+
+					"PUT /	":
+						"v1.notifications.updateAllNotifications",
+					"GET /notify-by-user":
+						"v1.notifications.getUserNotifications"
 				},
 				cors: {
 					origin: ["http://localhost:3001", "https://localhost:3002"],

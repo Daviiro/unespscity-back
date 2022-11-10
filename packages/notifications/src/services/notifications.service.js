@@ -14,15 +14,14 @@ module.exports = {
 					if (
 						ctx.params.data.userId &&
 						ctx.params.data.name &&
-						ctx.params.data.description &&
-						ctx.params.data.status
+						ctx.params.data.description
 					) {
 						return Notifications.create({
 							_id,
 							userId: ctx.params.data.userId,
 							name: ctx.params.data.name,
 							description: ctx.params.data.description,
-							status: ctx.params.data.status,
+							status: 1,
 							date: today,
 						});
 					}
@@ -30,6 +29,18 @@ module.exports = {
 				return false;
 			},
 		},
+
+		getAllNotifications: {
+			async handler(ctx) {
+				if (ctx.params.userId) {
+					return await Notifications.find({
+						userId: ctx.params.userId,
+					});
+				}
+				return false;
+			},
+		},
+
 
 		getUserNotifications: {
 			async handler(ctx) {
@@ -42,12 +53,10 @@ module.exports = {
 			},
 		},
 
-		delete: {
+		updateAllNotifications: {
 			async handler(ctx) {
-				if (ctx.params && ctx.params.id) {
-					return await Notifications.deleteOne({
-						_id: ctx.params.id,
-					});
+				if (ctx.params && ctx.params.userId) {
+					return await Notifications.updateMany({ userId: ctx.params.userId }, { $set: { status: 2 } });
 				}
 				return false;
 			},
