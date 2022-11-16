@@ -22,6 +22,14 @@ module.exports = {
 				path: "/api",
 				whitelist: ["**"],
 				aliases: {
+					// Historico
+					"GET /get-historic":
+						"v1.historic.getById",
+					"POST /create-historic":
+						"v1.historic.create",
+					"PUT /update-historic":
+						"v1.historic.update",
+					
 					// Assistencia Social
 					"GET /useful_contacts":
 						"v1.useful-contacts-service.getByCity",

@@ -1,6 +1,6 @@
 const StreetLighting = require("../model/StreetLighting")
 const mongoose = require('mongoose');
-const notificationsService = require("../../../notifications/src/services/notifications.service");
+//const notificationsService = require("../../../notifications/src/services/notifications.service");
 
 module.exports = {
     name: "street-lighting-service",
@@ -9,26 +9,40 @@ module.exports = {
         create: {
             async handler(ctx) {
                 const _id = mongoose.Types.ObjectId();
+                const historicId = mongoose.Types.ObjectId();
                 const timeElapsed = Date.now();
                 const today = new Date(timeElapsed);
                 if (ctx.params) {
-                    if (ctx.params.data.street
-                        && ctx.params.data.streetNumber
-                        && ctx.params.data.latitude
-                        && ctx.params.data.longitude
-                        && ctx.params.data.description
+                    if (ctx.params.street
+                        && ctx.params.streetNumber
+                        && ctx.params.latitude
+                        && ctx.params.longitude
+                        && ctx.params.description
+                        && ctx.params.userId
                     ) {
+                        this.createHistoric({
+                            id: historicId,
+                            userId: ctx.params.userId,
+                            serviceId: _id,
+                            serviceName: "Problemas na Iluminação Publica",
+                            description: ctx.params.description,
+                            street: ctx.params.street,
+                            streetNumber: ctx.params.streetNumber,
+                            isResolved: 1,
+                            date: today,
+                        });
+
                         return StreetLighting.create({
                             _id,
-                            userId: ctx.params.data.userId,
-                            cityId: ctx.params.data.cityId,
-                            street: ctx.params.data.street,
-                            streetNumber: ctx.params.data.streetNumber,
-                            referencePoint: ctx.params.data.referencePoint,
-                            latitude: ctx.params.data.latitude,
-                            longitude: ctx.params.data.longitude,
-                            description: ctx.params.data.description,
-                            images: ctx.params.data.images,
+                            userId: ctx.params.userId,
+                            cityId: ctx.params.cityId,
+                            street: ctx.params.street,
+                            streetNumber: ctx.params.streetNumber,
+                            referencePoint: ctx.params.referencePoint,
+                            latitude: ctx.params.latitude,
+                            longitude: ctx.params.longitude,
+                            description: ctx.params.description,
+                            images: ctx.params.images,
                             isResolved: false,
                             date: today
                         })
@@ -59,14 +73,14 @@ module.exports = {
                     const _id = mongoose.Types.ObjectId();
                     const timeElapsed = Date.now();
                     const today = new Date(timeElapsed);
-                    notificationsService.actions.create({
+                    /* notificationsService.actions.create({
                         _id,
                         userId: ctx.params.userId,
                         name: 'Serviço de Reparos de Postes de Luz',
                         description: ctx.params.description,
                         status: 1,
                         date: today,
-                    })
+                    }) */
                     return await StreetLighting.updateOne({ _id: ctx.params.id }, {
                         $set: {
                             street: ctx.params.street,
@@ -98,6 +112,31 @@ module.exports = {
                     return await StreetLighting.deleteOne({ _id: ctx.params.id })
                 }
                 return false
+            }
+        }
+    },
+
+    methods: {
+        async createHistoric(params) {
+            try {
+                await this.broker.call("v1.historic.create", {
+                    _id: params.id,
+                    userId: params.userId,
+                    serviceId: params.serviceId,
+                    serviceName: params.serviceName,
+                    description: params.description,
+                    street: params.street,
+                    streetNumber: params.streetNumber,
+                    isResolved: params.isResolved,
+                    date: params.date,
+                });
+                return true;
+            } catch (error) {
+                if (error.name == "ServiceNotFoundError") {
+                    this.logger.info(error);
+                    return;
+                } else
+                    throw error;
             }
         }
     }

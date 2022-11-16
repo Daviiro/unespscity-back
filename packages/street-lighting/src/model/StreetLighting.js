@@ -11,7 +11,7 @@ const schema = mongoose.Schema({
     longitude: Number,
     description: String,
     images: [String], 
-    isResolved: Boolean,
+    isResolved: Number,
     date: Date
 })
 
