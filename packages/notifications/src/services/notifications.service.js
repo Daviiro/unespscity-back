@@ -10,21 +10,19 @@ module.exports = {
 				const _id = mongoose.Types.ObjectId();
 				const timeElapsed = Date.now();
 				const today = new Date(timeElapsed);
-				if (ctx.params.data) {
-					if (
-						ctx.params.data.userId &&
-						ctx.params.data.name &&
-						ctx.params.data.description
-					) {
-						return Notifications.create({
-							_id,
-							userId: ctx.params.data.userId,
-							name: ctx.params.data.name,
-							description: ctx.params.data.description,
-							status: 1,
-							date: today,
-						});
-					}
+				if (ctx.params) {
+					return Notifications.create({
+						_id,
+						serviceId: ctx.params.serviceId,
+						userId: ctx.params.userId,
+						serviceName: ctx.params.serviceName,
+						description: ctx.params.description,
+						street: ctx.params.street,
+						streetNumber: ctx.params.streetNumber,
+						status: ctx.params.status,
+						date: today,
+					});
+
 				}
 				return false;
 			},

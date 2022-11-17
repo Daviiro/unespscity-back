@@ -36,7 +36,7 @@ module.exports = {
 				if (ctx.params && ctx.params.userId) {
 					return await Historic.find({
 						userId: ctx.params.userId,
-					});
+					}).sort({ date: -1 });
 				}
 				return [];
 			},

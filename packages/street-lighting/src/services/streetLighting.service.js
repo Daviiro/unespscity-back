@@ -1,6 +1,5 @@
 const StreetLighting = require("../model/StreetLighting")
 const mongoose = require('mongoose');
-//const notificationsService = require("../../../notifications/src/services/notifications.service");
 
 module.exports = {
     name: "street-lighting-service",
@@ -73,14 +72,6 @@ module.exports = {
                     const _id = mongoose.Types.ObjectId();
                     const timeElapsed = Date.now();
                     const today = new Date(timeElapsed);
-                    /* notificationsService.actions.create({
-                        _id,
-                        userId: ctx.params.userId,
-                        name: 'Serviço de Reparos de Postes de Luz',
-                        description: ctx.params.description,
-                        status: 1,
-                        date: today,
-                    }) */
                     return await StreetLighting.updateOne({ _id: ctx.params.id }, {
                         $set: {
                             street: ctx.params.street,
@@ -99,8 +90,31 @@ module.exports = {
 
         updateResolved: {
             async handler(ctx) {
-                if (ctx.params && ctx.params.id) {
-                    return await StreetLighting.updateOne({ _id: ctx.params.id }, { $set: { isResolved: true } });
+                const _id = mongoose.Types.ObjectId();
+                const timeElapsed = Date.now();
+                const today = new Date(timeElapsed);
+                const problem = await StreetLighting.find({ _id: ctx.params.id })
+                console.log(problem)
+                let newDescription = '';
+                if (ctx.params) {
+                    if (ctx.params.isResolved === 2) {
+                        newDescription = problem[0].description + '\n\n Atualização: \n ' + ctx.params.description
+                    }
+                    if (ctx.params.isResolved === 3) {
+                        newDescription = problem[0].description + '\n\n Finalizado: \n ' + ctx.params.description
+                    }
+                    this.createNotification({
+                        _id,
+                        serviceId: ctx.params.id,
+                        userId: ctx.params.userId,
+                        serviceName: 'Problemas na Iluminação Publica',
+                        description: ctx.params.description,
+                        street: ctx.params.street,
+                        streetNumber: ctx.params.streetNumber,
+                        status: ctx.params.isResolved,
+                        date: today,
+                    })
+                    return await StreetLighting.updateOne({ _id: ctx.params.id }, { $set: { isResolved: ctx.params.isResolved, description: newDescription } });
                 }
                 return false
             }
@@ -128,6 +142,28 @@ module.exports = {
                     street: params.street,
                     streetNumber: params.streetNumber,
                     isResolved: params.isResolved,
+                    date: params.date,
+                });
+                return true;
+            } catch (error) {
+                if (error.name == "ServiceNotFoundError") {
+                    this.logger.info(error);
+                    return;
+                } else
+                    throw error;
+            }
+        },
+        async createNotification(params) {
+            try {
+                await this.broker.call("v1.notifications.create", {
+                    _id: params.id,
+                    serviceId: params.serviceId,
+                    userId: params.userId,
+                    serviceName: params.serviceName,
+                    description: params.description,
+                    street: params.street,
+                    streetNumber: params.streetNumber,
+                    status: params.status,
                     date: params.date,
                 });
                 return true;

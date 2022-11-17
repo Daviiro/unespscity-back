@@ -90,7 +90,7 @@ module.exports = {
 						"v1.street-lighting-service.create",
 					"PUT /street_lighting/:id":
 						"v1.street-lighting-service.update",
-					"PUT /street_lighting/update_resolved/:id":
+					"PUT /street_lighting/update-status":
 						"v1.street-lighting-service.updateResolved",
 					"DELETE /del_street_lighting/:id":
 						"v1.street-lighting-service.delete",
@@ -465,8 +465,8 @@ module.exports = {
 					"DELETE /domesticviolence":
 						"v1.victims-of-domestic-violence.delete",
 
-					"PUT /	":
-						"v1.notifications.updateAllNotifications",
+					"POST /create-notification":
+						"v1.notifications.create",
 					"GET /notify-by-user":
 						"v1.notifications.getUserNotifications"
 				},

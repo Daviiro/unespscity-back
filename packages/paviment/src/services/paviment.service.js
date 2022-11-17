@@ -86,8 +86,15 @@ module.exports = {
 
         updateResolved: {
             async handler(ctx) {
-                if (ctx.params && ctx.params.id) {
-                    return await Paviment.updateOne({ _id: ctx.params.id }, { $set: { isResolved: true } });
+                let newDescription = ''; 
+                if (ctx.params) {
+                    if (ctx.params.isResolved === 2) {
+                        newDescription = '\n\n Atualização: \n ' + ctx.params.description
+                    }
+                    if (ctx.params.isResolved === 3) {
+                        newDescription = '\n\n Finalizado: \n ' + ctx.params.description
+                    }
+                    return await Paviment.updateOne({ _id: ctx.params.id }, { $set: { isResolved: ctx.params.isResolved,  description: $getField + newDescription} });
                 }
                 return false
             }
