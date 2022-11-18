@@ -29,24 +29,13 @@ module.exports = {
 			},
 		},
 
-		getAllNotifications: {
-			async handler(ctx) {
-				if (ctx.params.userId) {
-					return await Notifications.find({
-						userId: ctx.params.userId,
-					});
-				}
-				return false;
-			},
-		},
-
 
 		getUserNotifications: {
 			async handler(ctx) {
 				if (ctx.params.userId) {
 					return await Notifications.find({
 						userId: ctx.params.userId,
-					});
+					}).sort({ date: -1 });
 				}
 				return false;
 			},

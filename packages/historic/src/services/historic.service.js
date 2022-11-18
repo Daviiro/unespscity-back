@@ -31,6 +31,15 @@ module.exports = {
 			},
 		},
 
+		getAll: {
+			async handler(ctx) {
+				if (ctx.params) {
+					return await Historic.find({}).sort({ date: -1 });
+				}
+				return [];
+			},
+		},
+		
 		getById: {
 			async handler(ctx) {
 				if (ctx.params && ctx.params.userId) {

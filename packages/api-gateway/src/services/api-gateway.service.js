@@ -23,8 +23,10 @@ module.exports = {
 				whitelist: ["**"],
 				aliases: {
 					// Historico
-					"GET /get-historic":
+					"GET /get-historic-by-user":
 						"v1.historic.getById",
+					"GET /get-all-historic":
+						"v1.historic.getAll",
 					"POST /create-historic":
 						"v1.historic.create",
 					"PUT /update-historic":
