@@ -27,7 +27,7 @@ module.exports = {
                             description: ctx.params.description,
                             street: ctx.params.street,
                             streetNumber: ctx.params.streetNumber,
-                            isResolved: 1,
+                            serviceStatus: 1,
                             date: today,
                         });
                         return Paviment.create({
@@ -41,7 +41,7 @@ module.exports = {
                             longitude: ctx.params.longitude,
                             description: ctx.params.description,
                             images: ctx.params.images,
-                            isResolved: false,
+                            serviceStatus: false,
                             date: today
                         })
                     }
@@ -86,17 +86,33 @@ module.exports = {
 
         updateResolved: {
             async handler(ctx) {
-                let newDescription = ''; 
+                const _id = mongoose.Types.ObjectId();
+                const timeElapsed = Date.now();
+                const today = new Date(timeElapsed);
+                const problem = await Paviment.find({ _id: ctx.params.id })
+                let newDescription = '';
                 if (ctx.params) {
-                    if (ctx.params.isResolved === 2) {
-                        newDescription = '\n\n Atualização: \n ' + ctx.params.description
+                    if (ctx.params.serviceStatus === 2) {
+                        newDescription = problem[0].description + '\n\n Atualização: \n ' + ctx.params.description
                     }
-                    if (ctx.params.isResolved === 3) {
-                        newDescription = '\n\n Finalizado: \n ' + ctx.params.description
+                    if (ctx.params.serviceStatus === 3) {
+                        newDescription = problem[0].description + '\n\n Finalizado: \n ' + ctx.params.description
                     }
-                    return await Paviment.updateOne({ _id: ctx.params.id }, { $set: { isResolved: ctx.params.isResolved,  description: $getField + newDescription} });
+                    this.createNotification({
+                        _id,
+                        serviceId: ctx.params.id,
+                        userId: ctx.params.userId,
+                        serviceName: 'Problemas na Pavimentação',
+                        description: ctx.params.description,
+                        street: ctx.params.street,
+                        streetNumber: ctx.params.streetNumber,
+                        isRead: ctx.params.isRead,
+                        serviceStatus: ctx.params.serviceStatus,
+                        date: today,
+                    })
+                    return await Paviment.updateOne({ _id: ctx.params.id }, { $set: { serviceStatus: ctx.params.serviceStatus, description: newDescription } });
                 }
-                return false
+                return false;
             }
         },
 
@@ -122,10 +138,33 @@ module.exports = {
                     description: params.description,
                     street: params.street,
                     streetNumber: params.streetNumber,
-                    isResolved: params.isResolved,
+                    serviceStatus: params.serviceStatus,
                     date: params.date,
                 });
                 console.log('passou')
+                return true;
+            } catch (error) {
+                if (error.name == "ServiceNotFoundError") {
+                    this.logger.info(error);
+                    return;
+                } else
+                    throw error;
+            }
+        },
+        async createNotification(params) {
+            try {
+                await this.broker.call("v1.notifications.create", {
+                    _id: params.id,
+                    serviceId: params.serviceId,
+                    userId: params.userId,
+                    serviceName: params.serviceName,
+                    description: params.description,
+                    street: params.street,
+                    streetNumber: params.streetNumber,
+                    isRead: params.isRead,
+                    serviceStatus: params.serviceStatus,
+                    date: params.date,
+                });
                 return true;
             } catch (error) {
                 if (error.name == "ServiceNotFoundError") {

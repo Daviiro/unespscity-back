@@ -8,7 +8,8 @@ const schema = mongoose.Schema({
 	description: String,
 	street: String,
 	streetNumber: Number,
-	status: Number,
+	serviceStatus: Number,
+	isRead: Number,
 	date: Date,
 });
 

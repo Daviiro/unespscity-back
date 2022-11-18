@@ -8,7 +8,7 @@ const schema = mongoose.Schema({
 	description: String,
 	street: String,
 	streetNumber: Number,
-	isResolved: Number,
+	serviceStatus: Number,
 	date: Date,
 });
 

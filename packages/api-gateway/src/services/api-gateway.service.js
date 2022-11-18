@@ -60,7 +60,7 @@ module.exports = {
 					"POST /monument": "v1.fountains-monuments-service.create",
 					"PUT /monument/:id":
 						"v1.fountains-monuments-service.update",
-					"PUT /monument/update_resolved/:id":
+					"PUT /monument/update_resolved":
 						"v1.fountains-monuments-service.updateResolved",
 					"DELETE /monument/:id":
 						"v1.fountains-monuments-service.delete",
@@ -69,7 +69,7 @@ module.exports = {
 					"GET /paviment/:id": "v1.paviment-service.getById",
 					"POST /create_paviment": "v1.paviment-service.create",
 					"PUT /paviment/:id": "v1.paviment-service.update",
-					"PUT /paviment/update_resolved/:id":
+					"PUT /paviment/update_resolved":
 						"v1.paviment-service.updateResolved",
 					"DELETE /del_paviment/:id": "v1.paviment-service.delete",
 
@@ -467,6 +467,8 @@ module.exports = {
 
 					"POST /create-notification":
 						"v1.notifications.create",
+					"PUT /update-is-read":
+						"v1.notifications.updateAllNotifications",
 					"GET /notify-by-user":
 						"v1.notifications.getUserNotifications"
 				},

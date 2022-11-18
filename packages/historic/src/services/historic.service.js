@@ -22,7 +22,7 @@ module.exports = {
 							description: ctx.params.description,
 							street: ctx.params.street,
 							streetNumber: ctx.params.streetNumber,
-							isResolved: ctx.params.isResolved,
+							serviceStatus: ctx.params.serviceStatus,
 							date: today,
 						});
 					}
@@ -53,7 +53,7 @@ module.exports = {
 								description: ctx.params.data.description,
 								street: ctx.params.data.street,
 								streetNumber: ctx.params.data.streetNumber,
-								isResolved: ctx.params.data.isResolved,
+								serviceStatus: ctx.params.data.serviceStatus,
 								date: today,
 							},
 						}

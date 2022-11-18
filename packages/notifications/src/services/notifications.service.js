@@ -19,7 +19,8 @@ module.exports = {
 						description: ctx.params.description,
 						street: ctx.params.street,
 						streetNumber: ctx.params.streetNumber,
-						status: ctx.params.status,
+						serviceStatus: ctx.params.serviceStatus,
+						isRead: ctx.params.isRead,
 						date: today,
 					});
 
@@ -54,7 +55,7 @@ module.exports = {
 		updateAllNotifications: {
 			async handler(ctx) {
 				if (ctx.params && ctx.params.userId) {
-					return await Notifications.updateMany({ userId: ctx.params.userId }, { $set: { status: 2 } });
+					return await Notifications.updateMany({ userId: ctx.params.userId }, { $set: { isRead: 2 } });
 				}
 				return false;
 			},

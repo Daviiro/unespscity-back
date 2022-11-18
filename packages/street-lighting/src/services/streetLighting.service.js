@@ -27,7 +27,7 @@ module.exports = {
                             description: ctx.params.description,
                             street: ctx.params.street,
                             streetNumber: ctx.params.streetNumber,
-                            isResolved: 1,
+                            serviceStatus: 1,
                             date: today,
                         });
 
@@ -42,7 +42,7 @@ module.exports = {
                             longitude: ctx.params.longitude,
                             description: ctx.params.description,
                             images: ctx.params.images,
-                            isResolved: false,
+                            serviceStatus: false,
                             date: today
                         })
                     }
@@ -94,13 +94,12 @@ module.exports = {
                 const timeElapsed = Date.now();
                 const today = new Date(timeElapsed);
                 const problem = await StreetLighting.find({ _id: ctx.params.id })
-                console.log(problem)
                 let newDescription = '';
                 if (ctx.params) {
-                    if (ctx.params.isResolved === 2) {
+                    if (ctx.params.serviceStatus === 2) {
                         newDescription = problem[0].description + '\n\n Atualização: \n ' + ctx.params.description
                     }
-                    if (ctx.params.isResolved === 3) {
+                    if (ctx.params.serviceStatus === 3) {
                         newDescription = problem[0].description + '\n\n Finalizado: \n ' + ctx.params.description
                     }
                     this.createNotification({
@@ -111,10 +110,11 @@ module.exports = {
                         description: ctx.params.description,
                         street: ctx.params.street,
                         streetNumber: ctx.params.streetNumber,
-                        status: ctx.params.isResolved,
+                        isRead: ctx.params.isRead,
+                        serviceStatus: ctx.params.serviceStatus,
                         date: today,
                     })
-                    return await StreetLighting.updateOne({ _id: ctx.params.id }, { $set: { isResolved: ctx.params.isResolved, description: newDescription } });
+                    return await StreetLighting.updateOne({ _id: ctx.params.id }, { $set: { serviceStatus: ctx.params.serviceStatus, description: newDescription } });
                 }
                 return false
             }
@@ -141,7 +141,7 @@ module.exports = {
                     description: params.description,
                     street: params.street,
                     streetNumber: params.streetNumber,
-                    isResolved: params.isResolved,
+                    serviceStatus: params.serviceStatus,
                     date: params.date,
                 });
                 return true;
@@ -163,7 +163,8 @@ module.exports = {
                     description: params.description,
                     street: params.street,
                     streetNumber: params.streetNumber,
-                    status: params.status,
+                    isRead: params.isRead,
+                    serviceStatus: params.serviceStatus,
                     date: params.date,
                 });
                 return true;
