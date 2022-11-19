@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev01": "lerna run start --scope @01_service/*",
-    "dev02": "lerna run start --scope @02_service/*"
+    "dev02": "lerna run start --scope @02_service/*",
+    "complete_dev": "lerna run start --scope @main_service/*"
   },
   "author": "",
   "license": "ISC",

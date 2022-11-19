@@ -1,5 +1,5 @@
 {
-	"name": "@service-dev/historic",
+	"name": "@main_service/historic",
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",

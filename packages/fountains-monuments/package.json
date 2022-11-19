@@ -1,5 +1,5 @@
 {
-  "name": "@01-service/fountains-monuments",
+  "name": "@main_service/fountains-monuments",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",

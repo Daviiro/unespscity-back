@@ -1,5 +1,5 @@
 {
-  "name": "@01-service/paviment",
+  "name": "@main_service/paviment",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",

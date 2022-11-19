@@ -1,5 +1,5 @@
 {
-  "name": "@01_service/street-lighting",
+  "name": "@main_service/street-lighting",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
