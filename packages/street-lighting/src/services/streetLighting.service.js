@@ -69,9 +69,12 @@ module.exports = {
         update: {
             async handler(ctx) {
                 if (ctx.params && ctx.params.id) {
-                    const _id = mongoose.Types.ObjectId();
-                    const timeElapsed = Date.now();
-                    const today = new Date(timeElapsed);
+                    this.updateHistoric({
+                        serviceId: params.id,
+                        description: ctx.params.description,
+                        street: ctx.params.street,
+                        streetNumber: ctx.params.streetNumber,
+                    })
                     return await StreetLighting.updateOne({ _id: ctx.params.id }, {
                         $set: {
                             street: ctx.params.street,
@@ -110,9 +113,16 @@ module.exports = {
                         description: ctx.params.description,
                         street: ctx.params.street,
                         streetNumber: ctx.params.streetNumber,
-                        isRead: ctx.params.isRead,
+                        isRead: 1,
                         serviceStatus: ctx.params.serviceStatus,
                         date: today,
+                    })
+                    this.updateHistoric({
+                        serviceId: params.id,
+                        description: ctx.params.description,
+                        street: ctx.params.street,
+                        streetNumber: ctx.params.streetNumber,
+                        serviceStatus: ctx.params.serviceStatus,
                     })
                     return await StreetLighting.updateOne({ _id: ctx.params.id }, { $set: { serviceStatus: ctx.params.serviceStatus, description: newDescription } });
                 }
@@ -143,6 +153,24 @@ module.exports = {
                     streetNumber: params.streetNumber,
                     serviceStatus: params.serviceStatus,
                     date: params.date,
+                });
+                return true;
+            } catch (error) {
+                if (error.name == "ServiceNotFoundError") {
+                    this.logger.info(error);
+                    return;
+                } else
+                    throw error;
+            }
+        },
+        async updateHistoric(params) {
+            try {
+                await this.broker.call("v1.historic.update", {
+                    serviceId: params.serviceId,
+                    description: params.description,
+                    street: params.street,
+                    streetNumber: params.streetNumber,
+                    serviceStatus: params.serviceStatus,
                 });
                 return true;
             } catch (error) {

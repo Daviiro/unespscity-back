@@ -39,7 +39,7 @@ module.exports = {
 				return [];
 			},
 		},
-		
+
 		getById: {
 			async handler(ctx) {
 				if (ctx.params && ctx.params.userId) {
@@ -58,12 +58,10 @@ module.exports = {
 						{ serviceId: ctx.params.data.serviceId },
 						{
 							$set: {
-								serviceName: ctx.params.data.serviceName,
 								description: ctx.params.data.description,
 								street: ctx.params.data.street,
 								streetNumber: ctx.params.data.streetNumber,
-								serviceStatus: ctx.params.data.serviceStatus,
-								date: today,
+								serviceStatus: ctx.params.data.serviceStatus && ctx.params.data.serviceStatus,
 							},
 						}
 					);
