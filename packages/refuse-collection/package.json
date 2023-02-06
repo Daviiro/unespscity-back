@@ -12,6 +12,9 @@
 	"dependencies": {
 		"moleculer": "^0.14.23",
 		"moleculer-repl": "^0.7.2",
-		"mongoose": "^6.5.2"
+		"mongoose": "^6.5.2",
+		"mysql": "^2.18.1",
+		"mysql2": "^3.0.1",
+		"sequelize": "^6.28.0"
 	}
 }

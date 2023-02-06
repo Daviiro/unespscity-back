@@ -1,34 +1,33 @@
+const { where } = require("sequelize");
 const RefuseCollection = require("../model/RefuseCollection");
-const mongoose = require("mongoose");
 
 module.exports = {
-	name: "refuse-collection",
+	name: "refuse",
 	version: 1,
 	actions: {
 		create: {
 			async handler(ctx) {
-				const _id = mongoose.Types.ObjectId();
-				if (ctx.params.data) {
+				console.log(ctx)
+				if (ctx.params) {
 					if (
-						ctx.params.data.title &&
-						ctx.params.data.cityId &&
-						ctx.params.data.polygon &&
-						ctx.params.data.operatingDays &&
-						ctx.params.data.typeOfRefuse &&
-						ctx.params.data.startTime &&
-						ctx.params.data.finishTime
+						ctx.params.cityId &&
+						ctx.params.route &&
+						ctx.params.polygon &&
+						ctx.params.operatingDays &&
+						ctx.params.typeOfRefuse &&
+						ctx.params.startTime &&
+						ctx.params.finishTime
 					) {
 						return RefuseCollection.create({
-							_id,
-							title: ctx.params.data.title,
-							cityId: ctx.params.data.cityId,
-							polygon: ctx.params.data.polygon,
-							operatingDays: ctx.params.data.operatingDays,
-							typeOfRefuse: ctx.params.data.typeOfRefuse,
-							startTime: ctx.params.data.startTime,
-							finishTime: ctx.params.data.finishTime,
+							cityId: ctx.params.cityId,
+							route: ctx.params.route,
+							polygon: ctx.params.polygon,
+							operatingDays: ctx.params.operatingDays,
+							typeOfRefuse: ctx.params.typeOfRefuse,
+							startTime: ctx.params.startTime,
+							finishTime: ctx.params.finishTime,
 						});
-					}
+					}	
 				}
 				return false;
 			},
@@ -36,7 +35,7 @@ module.exports = {
 
 		getAll: {
 			async handler(ctx) {
-				return await RefuseCollection.find();
+				return await RefuseCollection.findAll();
 			},
 		},
 
@@ -61,5 +60,33 @@ module.exports = {
 				return false;
 			},
 		},
+
+		deleteAll: {
+			async handler(ctx) {
+				return await RefuseCollection.destroy({ truncate: true, where: {} });
+			},
+		},
+
+		update: {
+			async handler(ctx) {
+				if (ctx.params && ctx.params.id) {
+					return await RefuseCollection.updateOne(
+						{ _id: ctx.params.id },
+						{
+							$set: {
+								cityId: ctx.params.cityId,
+								route: ctx.params.route,
+								polygon: ctx.params.polygon,
+								operatingDays: ctx.params.operatingDays,
+								typeOfRefuse: ctx.params.typeOfRefuse,
+								startTime: ctx.params.startTime,
+								finishTime: ctx.params.finishTime,
+							},
+						}
+					);
+				}
+				return false;
+			}
+		}
 	},
 };
