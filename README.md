@@ -4,8 +4,8 @@
 
 ## Universidade Estadual Paulista (FCT UNESP) – Campus de Presidente Prudente
 
-:small_blue_diamond: hiromi.ono@unesp.br
-:small_orange_diamond: david.junior@unesp.br
-:small_blue_diamond: joao.couto@unesp.br
-:small_orange_diamond: pedro.zago@unesp.br
-:small_blue_diamond: ronaldo.correia@unesp.br
+• hiromi.ono@unesp.br
+• david.junior@unesp.br
+• joao.couto@unesp.br
+• pedro.zago@unesp.br
+• ronaldo.correia@unesp.br
